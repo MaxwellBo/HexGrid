@@ -4,6 +4,6 @@ public class Main {
         System.out.println("Hello World!");
 
         HexGridModel a = new HexGridModel();
-        a.debug();
+        a.view();
     }
 }
