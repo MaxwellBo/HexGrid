@@ -22,9 +22,14 @@ public class HexGridModel {
                 board.put(staged, new Tile(staged));
             }
         }
+
+
     }
 
     public void debug() {
-        board.keySet().stream().forEach(x -> System.out.println(x.toString()));
+        board.keySet()
+                .stream()
+                .forEach(x
+                        -> System.out.println(x.toRoffset(Offset.ODD).toString()));
     }
 }
