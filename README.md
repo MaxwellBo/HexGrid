@@ -1,6 +1,6 @@
 # HexGrid
 
-Essentially, porting [this] (http://www.redblobgames.com/grids/hexagons/implementation.html#code)(which is in C++) into Java.
+Essentially, porting [this] (http://www.redblobgames.com/grids/hexagons/implementation.html) (which is in C++) into Java.
 
 Basic explanation of what on earth this is.
 
