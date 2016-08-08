@@ -4,8 +4,8 @@ import javafx.geometry.Point2D;
  * Created by Max Bo on 7/08/2016.
  */
 
-public class Layout {
-    static public Orientation POINTY = new Orientation(
+class Layout {
+    static Orientation POINTY = new Orientation(
             Math.sqrt(3.0)
             , Math.sqrt(3.0) / 2.0
             , 0.0, 3.0 / 2.0
@@ -14,7 +14,7 @@ public class Layout {
             , 2.0 / 3.0
             , 0.5);
 
-    static public Orientation FLAT = new Orientation(
+    static Orientation FLAT = new Orientation(
             3.0 / 2.0
             , 0.0
             , Math.sqrt(3.0) / 2.0
@@ -24,17 +24,17 @@ public class Layout {
             , Math.sqrt(3.0) / 3.0
             , 0.0);
 
-    public final Orientation orientation;
-    public final Point2D size;
-    public final Point2D origin;
+    private final Orientation orientation;
+    private final Point2D size;
+    private final Point2D origin;
 
-    public Layout(Orientation orientation, Point2D size, Point2D origin) {
+    Layout(Orientation orientation, Point2D size, Point2D origin) {
         this.orientation = orientation;
         this.size = size;
         this.origin = origin;
     }
 
-    public Point2D hexToPoint(Hex h) {
+    Point2D hexToPoint(Hex h) {
         Orientation o = orientation;
 
         double x = (o.f0 * h.q + o.f1 * h.r) * size.getX();

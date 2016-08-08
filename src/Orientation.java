@@ -2,19 +2,19 @@
  * Created by Max Bo on 7/08/2016.
  */
 
-public class Orientation {
+class Orientation {
 
-    public final double f0;
-    public final double f1;
-    public final double f2;
-    public final double f3;
-    public final double b0;
-    public final double b1;
-    public final double b2;
-    public final double b3;
-    public final double start_angle;
+    final double f0;
+    final double f1;
+    final double f2;
+    final double f3;
+    final double b0;
+    final double b1;
+    final double b2;
+    final double b3;
+    final double start_angle;
 
-    public Orientation(double f0, double f1, double f2, double f3
+    Orientation(double f0, double f1, double f2, double f3
             , double b0, double b1, double b2, double b3
             , double start_angle)  {
         this.f0 = f0;

@@ -4,8 +4,8 @@
 
 public class Offset {
 
-    static public int EVEN = 1;
-    static public int ODD = -1;
+    static int EVEN = 1;
+    static int ODD = -1;
 
     public final int col;
     public final int row;

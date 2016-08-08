@@ -4,9 +4,9 @@
 
 import java.util.ArrayList;
 
-public class Hex {
+class Hex {
 
-    static private ArrayList<Hex> directions = new ArrayList<Hex>() {{
+    static final private ArrayList<Hex> directions = new ArrayList<Hex>() {{
         add(new Hex(1, 0, -1));
         add(new Hex(1, -1, 0));
         add(new Hex(0, -1, 1));
@@ -15,7 +15,7 @@ public class Hex {
         add(new Hex(0, 1, -1));
     }};
 
-    static public ArrayList<Hex> diagonals = new ArrayList<Hex>() {{
+    static final private ArrayList<Hex> diagonals = new ArrayList<Hex>() {{
         add(new Hex(2, -1, -1));
         add(new Hex(1, -2, 1));
         add(new Hex(-1, -1, 2));
@@ -24,12 +24,12 @@ public class Hex {
         add(new Hex(1, 1, -2));
     }};
 
-    public final int q;
-    public final int r;
-    public final int s;
+    final int q;
+    final int r;
+    final int s;
 
 
-    public Hex(int q, int r, int s) {
+    Hex(int q, int r, int s) {
         this.q = q;
         this.r = r;
         this.s = s;
@@ -66,45 +66,45 @@ public class Hex {
                 ", s=" + s +
                 '}';
     }
-    public Hex add(Hex other) {
+    private Hex add(Hex other) {
         return new Hex(q + other.q, r + other.r, s + other.s);
     }
 
-    public Hex subtract(Hex other) {
+    private Hex subtract(Hex other) {
         return new Hex(q - other.q, r - other.r, s - other.s);
     }
 
-    public Hex scale(int k) {
+    private Hex scale(int k) {
         return new Hex(q * k, r * k, s * k);
     }
 
-    public Hex neighbor(int direction) {
+    Hex neighbor(int direction) {
         Hex vector = directions.get(direction);
 
         return add(vector);
     }
 
-    public Hex diagonalNeighbor(int direction) {
+    Hex diagonalNeighbor(int direction) {
         Hex vector = diagonals.get(direction);
 
         return add(vector);
     }
 
-    public int length() {
+    int length() {
         return (int)((Math.abs(q) + Math.abs(r) + Math.abs(s)) / 2);
     }
 
-    public int distance(Hex other) {
+    int distance(Hex other) {
         return subtract(other).length();
     }
 
-    public Offset toQoffset(int offset) {
+    Offset toQoffset(int offset) {
         int col = q;
         int row = r + (int)((q + offset * (q & 1)) / 2);
         return new Offset(col, row);
     }
 
-    public Offset toRoffset(int offset) {
+    Offset toRoffset(int offset) {
         int col = q + (int)((r + offset * (r & 1)) / 2);
         int row = r;
         return new Offset(col, row);

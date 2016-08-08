@@ -1,18 +1,18 @@
 /**
  * Created by Max on 7/08/2016.
  */
-public class FractionalHex {
-    public final double q;
-    public final double r;
-    public final double s;
+class FractionalHex {
+    final double q;
+    final double r;
+    final double s;
 
-    public FractionalHex(double q, double r, double s) {
+    FractionalHex(double q, double r, double s) {
         this.q = q;
         this.r = r;
         this.s = s;
     }
 
-    public Hex round() {
+    Hex round() {
         int q = (int)(Math.round(this.q));
         int r = (int)(Math.round(this.r));
         int s = (int)(Math.round(this.s));
