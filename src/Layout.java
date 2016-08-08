@@ -43,7 +43,7 @@ class Layout {
         return new Point2D(x + origin.getX(), y + origin.getY());
     }
 
-    private FractionalHex pointToHex(Point2D p) {
+    FractionalHex pointToHex(Point2D p) {
         Orientation o = orientation;
 
         Point2D pt = new Point2D((p.getX() - origin.getX()) / size.getX()
