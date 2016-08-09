@@ -1,5 +1,6 @@
 import javafx.geometry.Point2D;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -7,19 +8,24 @@ import java.util.Map;
  */
 public class Tile {
 
-    private final Map<Hex, Tile> board;
-    public final Hex hex;
-    public final Point2D coords;
+    final HexGrid grid;
+    final Hex hex;
 
-    public Tile(Map<Hex, Tile> board, Hex hex, Point2D coords) {
-        this.board = board;
+    public Tile(HexGrid grid, Hex hex) {
+        this.grid = grid;
         this.hex = hex;
-        this.coords = coords;
     }
 
-
     public Tile neighbor(int direction) {
-        return board.get(hex.neighbor(direction));
+        return grid.getMap().get(this.hex.neighbor(direction));
+    }
+
+    public Point2D getCoords() {
+        return grid.getLayout().hexToPoint(this.hex);
+    }
+
+    public ArrayList<Point2D> getCorners() {
+        return grid.getLayout().corners(this.hex);
     }
 
 }

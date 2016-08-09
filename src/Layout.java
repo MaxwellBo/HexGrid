@@ -1,5 +1,7 @@
 import javafx.geometry.Point2D;
 
+import java.util.ArrayList;
+
 /**
  * Created by Max Bo on 7/08/2016.
  */
@@ -55,4 +57,24 @@ class Layout {
         return new FractionalHex(q, r, -q - r);
     }
 
+    private Point2D cornerOffset(int corner) {
+        Orientation M = orientation;
+        double angle = 2.0 * Math.PI * (M.start_angle - corner) / 6;
+        return new Point2D(size.getX() * Math.cos(angle)
+                , size.getY() * Math.sin(angle));
+    }
+
+    ArrayList<Point2D> corners(Hex h) {
+        ArrayList<Point2D> corners = new ArrayList<>();
+
+        Point2D center = hexToPoint(h);
+        for (int i = 0; i < 6; i++) {
+            Point2D offset = cornerOffset(i);
+
+            corners.add(new Point2D(center.getX() + offset.getX()
+                    , center.getY() + offset.getX()));
+        }
+
+        return corners;
+    }
 }

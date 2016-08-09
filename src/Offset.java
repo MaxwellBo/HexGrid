@@ -42,14 +42,14 @@ public class Offset {
                 '}';
     }
 
-    public Hex qoffsetToHex(int offset) {
+    Hex qoffsetToHex(int offset) {
         int q = col;
         int r = row - (int)((col + offset * (col & 1)) / 2);
         int s = -q - r;
         return new Hex(q, r, s);
     }
 
-    public Hex roffsetToHex(int offset) {
+    Hex roffsetToHex(int offset) {
         int q = col - (int)((row + offset * (row & 1)) / 2);
         int r = row;
         int s = -q - r;

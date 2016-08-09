@@ -38,9 +38,14 @@ class DisplayPanel extends JPanel {
         HexGrid grid = new HexGrid();
 
         for (Tile tile : grid) {
-            int x = (int)tile.coords.getX();
-            int y = (int)tile.coords.getY();
+            int x = (int)tile.getCoords().getX();
+            int y = (int)tile.getCoords().getY();
             g.fillRect(x, y, 6, 6);
+
+            Offset offset = tile.hex.toRoffset(Offset.EVEN);
+            g.drawString(Integer.toString(offset.row) + " " + Integer.toString(offset.col), x, y);
+
+
         }
 
     }

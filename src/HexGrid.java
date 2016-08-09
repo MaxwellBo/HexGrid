@@ -10,7 +10,10 @@ import java.util.Map;
  */
 
 /**
- * HexGrid is used to construct and build
+ * HexGrid is used to construct and build the grid, and provide a single entry
+ * for fetching a tile from the board. Once the tile has been retrieved, the
+ * Tile instance provides a single coherent interface to manipulate
+ * the rest of the board.
  */
 public class HexGrid implements Iterable<Tile> {
 
@@ -19,7 +22,7 @@ public class HexGrid implements Iterable<Tile> {
     private final int MAP_WIDTH = 6;
 
     private final Layout layout;
-    private final Map<Hex, Tile> board;
+    private final Map<Hex, Tile> map; // I mean, it's a literal map
 
     public HexGrid() {
         // Pointy <-> r-offset arrangement
@@ -28,8 +31,7 @@ public class HexGrid implements Iterable<Tile> {
         Point2D origin = new Point2D(64, 64);
 
         layout = new Layout(orientation, size, origin);
-        board = new HashMap<>();
-        Map<Hex, Tile> frozenBoard = Collections.unmodifiableMap(board);
+        map = new HashMap<>();
 
         for (int r = 0; r < MAP_HEIGHT; r++) {
             int r_offset = r / 2;
@@ -41,24 +43,28 @@ public class HexGrid implements Iterable<Tile> {
                 // Where do we want it to go on our screen
                 Point2D screenspace = layout.hexToPoint(hex);
 
-                board.put(hex, new Tile(frozenBoard, hex, screenspace));
+                // Give the tile a copy of this class, and its location,
+                // so that it can reason about its position on the screen
+                map.put(hex, new Tile(this, hex));
             }
         }
     }
 
     @Override
     public Iterator<Tile> iterator() {
-        return board.values().iterator();
-    }
-
-    public void view() {
-        for (Hex hex : board.keySet()) {
-            System.out.println(hex.toRoffset(Offset.EVEN));
-        }
+        return map.values().iterator();
     }
 
     public Tile pointToTile(int x, int y) {
-        return board.get(layout.pointToHex(new Point2D(x, y)).round());
+        return map.get(layout.pointToHex(new Point2D(x, y)).round());
+    }
+
+    Map<Hex, Tile> getMap() {
+        return Collections.unmodifiableMap(map);
+    }
+
+    Layout getLayout() {
+        return layout;
     }
 }
 

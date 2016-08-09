@@ -98,13 +98,13 @@ class Hex {
         return subtract(other).length();
     }
 
-    Offset toQoffset(int offset) {
+    public Offset toQoffset(int offset) {
         int col = q;
         int row = r + (int)((q + offset * (q & 1)) / 2);
         return new Offset(col, row);
     }
 
-    Offset toRoffset(int offset) {
+    public Offset toRoffset(int offset) {
         int col = q + (int)((r + offset * (r & 1)) / 2);
         int row = r;
         return new Offset(col, row);
