@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 class Hex {
 
+    // TODO: Convert this into a standard array
+    // An array list is a bit too heavy duty
     static final private ArrayList<Hex> directions = new ArrayList<Hex>() {{
         add(new Hex(1, 0, -1));
         add(new Hex(1, -1, 0));
