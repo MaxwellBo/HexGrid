@@ -39,13 +39,11 @@ public class HexGrid implements Iterable<Tile> {
             for (int q = -r_offset; q < MAP_WIDTH - r_offset; q++) {
 
                 // What tag does the position have
-                Hex hex = new Hex(q, r, -q - r);
-                // Where do we want it to go on our screen
-                Point2D screenspace = layout.hexToPoint(hex);
+                Hex location = new Hex(q, r, -q - r);
 
                 // Give the tile a copy of this class, and its location,
                 // so that it can reason about its position on the screen
-                map.put(hex, new Tile(this, hex));
+                map.put(location, new Tile(this, location));
             }
         }
     }
