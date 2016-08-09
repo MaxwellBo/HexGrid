@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class Main extends JPanel {
 
@@ -54,7 +55,6 @@ class DisplayPanel extends JPanel {
                             + Integer.toString(foundOffset.col));
                         System.out.println(found.getMinion().isPresent());
                 }
-
             }
         });
     }
@@ -79,6 +79,17 @@ class DisplayPanel extends JPanel {
                     + Integer.toString(offset.col), x, y);
 
             g.drawPolygon(tile.getXPoints(), tile.getYPoints(), 6);
+        }
+
+        Tile start = grid.pointToTile(256, 256);
+        Tile finish = grid.pointToTile(500, 500);
+
+        ArrayList<Tile> path = start.pathTo(finish);
+
+        for (Tile tile : path) {
+            int x = (int) tile.getCoords().getX();
+            int y = (int) tile.getCoords().getY();
+            g.fillRect(x - 10, y - 10, 20, 20);
         }
     }
 }

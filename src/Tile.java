@@ -1,7 +1,6 @@
 import javafx.geometry.Point2D;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Created by Max on 7/08/2016.
@@ -19,7 +18,7 @@ class Tile {
     }
 
     public Optional<Tile> neighbor(int direction) {
-        return Optional.of(grid.getMap().get(this.hex.neighbor(direction)));
+        return Optional.ofNullable(grid.getMap().get(this.hex.neighbor(direction)));
     }
 
     public Point2D getCoords() {
@@ -52,4 +51,48 @@ class Tile {
         minion = x;
     }
 
+    private ArrayList<Tile> emptyNeighbors() {
+        ArrayList<Tile> collector = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            Optional<Tile> n = neighbor(i);
+
+            // Only yield empty tiles
+            if (n.isPresent() && !n.get().getMinion().isPresent())
+                collector.add(neighbor(i).get());
+            }
+        return collector;
+    }
+
+    // Don't even bother asking me to explain this
+    public ArrayList<Tile> pathTo(Tile target) {
+        LinkedList<Tile> frontier = new LinkedList<>();
+        frontier.add(this);
+
+        HashMap<Tile, Tile> cameFrom = new HashMap<>();
+        cameFrom.put(this, null);
+
+        while (!frontier.isEmpty()) {
+            Tile current = frontier.removeFirst();
+
+            for (Tile next : current.emptyNeighbors()) {
+                if (!cameFrom.containsKey(next)) {
+                    frontier.add(next);
+                    cameFrom.put(next, current);
+                }
+            }
+        }
+
+        Tile current = target;
+        ArrayList<Tile> path = new ArrayList<>();
+        path.add(current);
+
+        while (current != this) {
+           current = cameFrom.get(current);
+            path.add(current);
+        }
+
+        path.add(this);
+        Collections.reverse(path);
+        return path;
+    }
 }
