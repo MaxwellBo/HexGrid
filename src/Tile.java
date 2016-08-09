@@ -2,6 +2,7 @@ import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by Max on 7/08/2016.
@@ -16,8 +17,8 @@ class Tile {
         this.hex = hex;
     }
 
-    public Tile neighbor(int direction) {
-        return grid.getMap().get(this.hex.neighbor(direction));
+    public Optional<Tile> neighbor(int direction) {
+        return Optional.of(grid.getMap().get(this.hex.neighbor(direction)));
     }
 
     public Point2D getCoords() {
