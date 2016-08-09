@@ -6,12 +6,12 @@ import java.util.Map;
 /**
  * Created by Max on 7/08/2016.
  */
-public class Tile {
+class Tile {
 
     final HexGrid grid;
     final Hex hex;
 
-    public Tile(HexGrid grid, Hex hex) {
+    Tile(HexGrid grid, Hex hex) {
         this.grid = grid;
         this.hex = hex;
     }
@@ -24,8 +24,21 @@ public class Tile {
         return grid.getLayout().hexToPoint(this.hex);
     }
 
-    public ArrayList<Point2D> getCorners() {
+    ArrayList<Point2D> getCorners() {
         return grid.getLayout().corners(this.hex);
     }
 
+    public int[] getXPoints() {
+        return getCorners()
+                .stream()
+                .mapToInt(x -> (int)(x.getX()))
+                .toArray();
+    }
+
+    public int[] getYPoints() {
+        return getCorners()
+                .stream()
+                .mapToInt(x -> (int)(x.getY()))
+                .toArray();
+    }
 }

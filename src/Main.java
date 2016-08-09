@@ -45,8 +45,10 @@ class DisplayPanel extends JPanel {
             Offset offset = tile.hex.toRoffset(Offset.EVEN);
             g.drawString(Integer.toString(offset.row) + " " + Integer.toString(offset.col), x, y);
 
+            g.drawPolygon(tile.getXPoints(), tile.getYPoints(), 6);
+
+
 
         }
-
     }
 }
