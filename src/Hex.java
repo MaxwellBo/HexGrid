@@ -8,23 +8,23 @@ class Hex {
 
     // TODO: Convert this into a standard array
     // An array list is a bit too heavy duty
-    static final private ArrayList<Hex> directions = new ArrayList<Hex>() {{
-        add(new Hex(1, 0, -1));
-        add(new Hex(1, -1, 0));
-        add(new Hex(0, -1, 1));
-        add(new Hex(-1, 0, 1));
-        add(new Hex(-1, 1, 0));
-        add(new Hex(0, 1, -1));
-    }};
+    static final private Hex[] directions = {
+        new Hex(1, 0, -1),
+        new Hex(1, -1, 0),
+        new Hex(0, -1, 1),
+        new Hex(-1, 0, 1),
+        new Hex(-1, 1, 0),
+        new Hex(0, 1, -1),
+    };
 
-    static final private ArrayList<Hex> diagonals = new ArrayList<Hex>() {{
-        add(new Hex(2, -1, -1));
-        add(new Hex(1, -2, 1));
-        add(new Hex(-1, -1, 2));
-        add(new Hex(-2, 1, 1));
-        add(new Hex(-1, 2, -1));
-        add(new Hex(1, 1, -2));
-    }};
+    static final private Hex[] diagonals = {
+        new Hex(2, -1, -1),
+        new Hex(1, -2, 1),
+        new Hex(-1, -1, 2),
+        new Hex(-2, 1, 1),
+        new Hex(-1, 2, -1),
+        new Hex(1, 1, -2)
+    };
 
     final int q;
     final int r;
@@ -81,13 +81,13 @@ class Hex {
     }
 
     Hex neighbor(int direction) {
-        Hex vector = directions.get(direction);
+        Hex vector = directions[direction];
 
         return add(vector);
     }
 
     Hex diagonalNeighbor(int direction) {
-        Hex vector = diagonals.get(direction);
+        Hex vector = diagonals[direction];
 
         return add(vector);
     }
