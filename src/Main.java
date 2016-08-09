@@ -40,24 +40,39 @@ class DisplayPanel extends JPanel {
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 Tile found = grid.pointToTile(e.getX(), e.getY());
-                Offset foundOffset = found.hex.toRoffset(Offset.EVEN);
-                System.out.println(Integer.toString(foundOffset.row)
-                        + " "
-                        + Integer.toString(foundOffset.col));
+
+                switch (e.getButton()) {
+                    case MouseEvent.BUTTON1:
+                        found.setMinion(new Minion(1, 1));
+                        repaint();
+                        break;
+                    case MouseEvent.BUTTON2:
+                    case MouseEvent.BUTTON3:
+                        Offset foundOffset = found.hex.toRoffset(Offset.EVEN);
+                        System.out.println(Integer.toString(foundOffset.row)
+                            + " "
+                            + Integer.toString(foundOffset.col));
+                        System.out.println(found.getMinion().isPresent());
+                }
+
             }
         });
     }
 
-
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.RED);
 
         for (Tile tile : grid) {
+
             int x = (int) tile.getCoords().getX();
             int y = (int) tile.getCoords().getY();
-            g.fillRect(x, y, 6, 6);
 
+            g.setColor(Color.RED);
+            if (tile.getMinion().isPresent()) {
+                g.fillRect(x - 10, y - 10, 20, 20);
+            }
+
+            g.setColor(Color.BLACK);
             Offset offset = tile.hex.toRoffset(Offset.EVEN);
             g.drawString(Integer.toString(offset.row)
                     + " "

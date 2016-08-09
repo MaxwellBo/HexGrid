@@ -10,10 +10,12 @@ class Tile {
 
     final HexGrid grid;
     final Hex hex;
+    private Minion minion;
 
     Tile(HexGrid grid, Hex hex) {
         this.grid = grid;
         this.hex = hex;
+        this.minion = null;
     }
 
     public Optional<Tile> neighbor(int direction) {
@@ -41,4 +43,13 @@ class Tile {
                 .mapToInt(x -> (int)(x.getY()))
                 .toArray();
     }
+
+    public Optional<Minion> getMinion() {
+        return Optional.ofNullable(minion);
+    }
+
+    public void setMinion(Minion x) {
+        minion = x;
+    }
+
 }
