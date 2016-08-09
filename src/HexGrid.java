@@ -24,8 +24,8 @@ public class HexGrid implements Iterable<Tile> {
     public HexGrid() {
         // Pointy <-> r-offset arrangement
         Orientation orientation = Layout.POINTY;
-        Point2D size = new Point2D(16, 16);
-        Point2D origin = new Point2D(32, 32);
+        Point2D size = new Point2D(48, 48);
+        Point2D origin = new Point2D(64, 64);
 
         layout = new Layout(orientation, size, origin);
         board = new HashMap<>();
@@ -47,7 +47,7 @@ public class HexGrid implements Iterable<Tile> {
     }
 
     @Override
-    public Iterator<Tile>iterator() {
+    public Iterator<Tile> iterator() {
         return board.values().iterator();
     }
 
@@ -57,7 +57,8 @@ public class HexGrid implements Iterable<Tile> {
         }
     }
 
-    public Tile pixel_to_tile(int x, int y) {
+    public Tile pointToTile(int x, int y) {
         return board.get(layout.pointToHex(new Point2D(x, y)).round());
     }
 }
+
