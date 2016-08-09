@@ -72,7 +72,7 @@ class Layout {
             Point2D offset = cornerOffset(i);
 
             corners.add(new Point2D(center.getX() + offset.getX()
-                    , center.getY() + offset.getX()));
+                    , center.getY() + offset.getY()));
         }
 
         return corners;
