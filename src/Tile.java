@@ -87,7 +87,13 @@ class Tile {
         path.add(current);
 
         while (current != this) {
-           current = cameFrom.get(current);
+            current = cameFrom.get(current);
+
+            if (current == null) {
+                // Path invalid
+                return new ArrayList<>();
+            }
+
             path.add(current);
         }
 

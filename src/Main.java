@@ -82,14 +82,20 @@ class DisplayPanel extends JPanel {
         }
 
         Tile start = grid.pointToTile(256, 256);
-        Tile finish = grid.pointToTile(500, 500);
+        Tile finish = grid.pointToTile(800, 550);
 
         ArrayList<Tile> path = start.pathTo(finish);
 
-        for (Tile tile : path) {
-            int x = (int) tile.getCoords().getX();
-            int y = (int) tile.getCoords().getY();
-            g.fillRect(x - 10, y - 10, 20, 20);
-        }
+        int[] xs = path
+                    .stream()
+                    .mapToInt(x -> (int)(x.getCoords().getX()))
+                    .toArray();
+
+        int[] ys = path
+                .stream()
+                .mapToInt(x -> (int)(x.getCoords().getY()))
+                .toArray();
+        g.drawPolyline(xs, ys, path.size());
+
     }
 }
