@@ -27,8 +27,8 @@ public class HexGrid implements Iterable<Tile> {
     public HexGrid() {
         // Pointy <-> r-offset arrangement
         Orientation orientation = Layout.POINTY;
-        Point2D size = new Point2D(48, 48);
-        Point2D origin = new Point2D(64, 64);
+        Point2D size = new Point2D(72, 48);
+        Point2D origin = new Point2D(256, 256);
 
         layout = new Layout(orientation, size, origin);
         map = new HashMap<>();
@@ -36,14 +36,16 @@ public class HexGrid implements Iterable<Tile> {
         for (int r = 0; r < MAP_HEIGHT; r++) {
             int r_offset = r / 2;
 
-            for (int q = -r_offset; q < MAP_WIDTH - r_offset; q++) {
+            for (int q = -r_offset - 1; q < MAP_WIDTH - r_offset; q++) {
 
                 // What tag does the position have
                 Hex location = new Hex(q, r, -q - r);
 
+                if (location.toRoffset(Offset.EVEN).col >= 0) {
+                    map.put(location, new Tile(this, location));
+                }
                 // Give the tile a copy of this class, and its location,
                 // so that it can reason about its position on the screen
-                map.put(location, new Tile(this, location));
             }
         }
     }
