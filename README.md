@@ -1,7 +1,5 @@
 # HexGrid
 
-Essentially, porting [this] (http://www.redblobgames.com/grids/hexagons/implementation.html) (which is in C++) into Java.
-
 Basic explanation of what on earth this is.
 
 The Hex class are immutable 3-dimensional coordinates. These are used to _tag_ resources that are actually useful for us, like the tiles that we'll be using to put minions on.
