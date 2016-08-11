@@ -1,10 +1,11 @@
+/**
+ * Created by Max Bo on 7/08/2016.
+ */
+
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
 
-/**
- * Created by Max Bo on 7/08/2016.
- */
 
 class Layout {
     static Orientation POINTY = new Orientation(

@@ -1,13 +1,13 @@
+/**
+ * Created by Max Bo on 7/08/2016.
+ */
+
 import javafx.geometry.Point2D;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-/**
- * Created by Max on 7/08/2016.
- */
 
 /**
  * HexGrid is used to construct and build the grid, and provide a single entry

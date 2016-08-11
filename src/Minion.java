@@ -1,5 +1,5 @@
 /**
- * Created by Max on 9/08/2016.
+ * Created by Max Bo on 9/08/2016.
  */
 public class Minion {
 

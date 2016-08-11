@@ -1,10 +1,12 @@
+/**
+ * Created by Max Bo on 7/08/2016.
+ */
+
 import javafx.geometry.Point2D;
 
 import java.util.*;
 
-/**
- * Created by Max on 7/08/2016.
- */
+
 class Tile {
 
     final HexGrid grid;

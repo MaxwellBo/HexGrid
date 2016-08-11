@@ -1,6 +1,7 @@
 /**
  * Created by Max on 7/08/2016.
  */
+
 class FractionalHex {
     final double q;
     final double r;

@@ -2,12 +2,8 @@
  * Created by Max Bo on 7/08/2016.
  */
 
-import java.util.ArrayList;
-
 class Hex {
 
-    // TODO: Convert this into a standard array
-    // An array list is a bit too heavy duty
     static final private Hex[] directions = {
         new Hex(1, 0, -1),
         new Hex(1, -1, 0),
