@@ -66,7 +66,7 @@ class Tile {
     }
 
     // Don't even bother asking me to explain this
-    public ArrayList<Tile> pathTo(Tile target) {
+    public Optional<ArrayList<Tile>> pathTo(Tile target) {
         LinkedList<Tile> frontier = new LinkedList<>();
         frontier.add(this);
 
@@ -93,7 +93,7 @@ class Tile {
 
             if (current == null) {
                 // Path invalid
-                return new ArrayList<>();
+                return Optional.empty();
             }
 
             path.add(current);
@@ -101,6 +101,6 @@ class Tile {
 
         path.add(this);
         Collections.reverse(path);
-        return path;
+        return Optional.of(path);
     }
 }

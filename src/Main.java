@@ -6,6 +6,7 @@ import java.awt.Container;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Main extends JPanel {
 
@@ -84,7 +85,7 @@ class DisplayPanel extends JPanel {
         Tile start = grid.pointToTile(256, 256);
         Tile finish = grid.pointToTile(800, 550);
 
-        ArrayList<Tile> path = start.pathTo(finish);
+        ArrayList<Tile> path = start.pathTo(finish).orElse(new ArrayList<>());
 
         int[] xs = path
                     .stream()
