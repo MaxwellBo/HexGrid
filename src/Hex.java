@@ -2,8 +2,6 @@
  * Created by Max Bo on 7/08/2016.
  */
 
-import java.util.ArrayList;
-
 class Hex {
 
     static final private Hex[] directions = {

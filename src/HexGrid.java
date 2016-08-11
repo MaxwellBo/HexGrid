@@ -1,13 +1,13 @@
+/**
+ * Created by Max Bo on 7/08/2016.
+ */
+
 import javafx.geometry.Point2D;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-/**
- * Created by Max on 7/08/2016.
- */
 
 /**
  * HexGrid is used to construct and build the grid, and provide a single entry
@@ -20,6 +20,8 @@ public class HexGrid implements Iterable<Tile> {
     // Hardcoded appearance values
     private final int MAP_HEIGHT = 5;
     private final int MAP_WIDTH = 6;
+    final int OFFSET = Offset.EVEN;
+    final char OFFSET_TYPE = 'R';
 
     private final Layout layout;
     private final Map<Hex, Tile> map; // I mean, it's a literal map
@@ -41,7 +43,7 @@ public class HexGrid implements Iterable<Tile> {
                 // What tag does the position have
                 Hex location = new Hex(q, r, -q - r);
 
-                if (location.toRoffset(Offset.EVEN).col >= 0) {
+                if (location.toRoffset(OFFSET).col >= 0) {
                     map.put(location, new Tile(this, location));
                 }
                 // Give the tile a copy of this class, and its location,

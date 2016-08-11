@@ -2,15 +2,15 @@
  * Created by Max Bo on 7/08/2016.
  */
 
-public class Offset {
+class Offset {
 
-    static int EVEN = 1;
-    static int ODD = -1;
+    static final int EVEN = 1;
+    static final int ODD = -1;
 
     public final int col;
     public final int row;
 
-    public Offset(int col, int row) {
+    Offset(int col, int row) {
         this.col = col;
         this.row = row;
     }

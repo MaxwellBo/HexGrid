@@ -1,14 +1,16 @@
+/**
+ * Created by Max Bo on 7/08/2016.
+ */
+
 import javafx.geometry.Point2D;
 
 import java.util.*;
 
-/**
- * Created by Max on 7/08/2016.
- */
+
 class Tile {
 
-    final HexGrid grid;
-    final Hex hex;
+    private final HexGrid grid;
+    private final Hex hex;
     private Minion minion;
 
     Tile(HexGrid grid, Hex hex) {
@@ -17,7 +19,7 @@ class Tile {
         this.minion = null;
     }
 
-    public Optional<Tile> neighbor(int direction) {
+    public Optional<Tile> getNeighbor(int direction) {
         return Optional.ofNullable(grid.getMap().get(this.hex.neighbor(direction)));
     }
 
@@ -51,20 +53,20 @@ class Tile {
         minion = x;
     }
 
-    private ArrayList<Tile> emptyNeighbors() {
+    private ArrayList<Tile> getEmptyNeighbors() {
         ArrayList<Tile> collector = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            Optional<Tile> n = neighbor(i);
+            Optional<Tile> n = getNeighbor(i);
 
             // Only yield empty tiles
             if (n.isPresent() && !n.get().getMinion().isPresent())
-                collector.add(neighbor(i).get());
+                collector.add(getNeighbor(i).get());
             }
         return collector;
     }
 
     // Don't even bother asking me to explain this
-    public ArrayList<Tile> pathTo(Tile target) {
+    public Optional<ArrayList<Tile>> pathTo(Tile target) {
         LinkedList<Tile> frontier = new LinkedList<>();
         frontier.add(this);
 
@@ -74,7 +76,7 @@ class Tile {
         while (!frontier.isEmpty()) {
             Tile current = frontier.removeFirst();
 
-            for (Tile next : current.emptyNeighbors()) {
+            for (Tile next : current.getEmptyNeighbors()) {
                 if (!cameFrom.containsKey(next)) {
                     frontier.add(next);
                     cameFrom.put(next, current);
@@ -91,7 +93,7 @@ class Tile {
 
             if (current == null) {
                 // Path invalid
-                return new ArrayList<>();
+                return Optional.empty();
             }
 
             path.add(current);
@@ -99,6 +101,50 @@ class Tile {
 
         path.add(this);
         Collections.reverse(path);
-        return path;
+        return Optional.of(path);
+    }
+
+    public Set<Tile> reachableTiles(int steps) {
+        Set<Tile> visited = new HashSet<>();
+        visited.add(this);
+
+        ArrayList<ArrayList<Tile>> fringes = new ArrayList<>();
+        ArrayList<Tile> start = new ArrayList<>();
+        start.add(this);
+        fringes.add(start);
+
+        for (int k = 1; k <= steps; k++) {
+            ArrayList<Tile> collector = new ArrayList<>();
+            fringes.add(collector);
+
+            for (Tile tile : fringes.get(k - 1)) {
+                for (Tile neighbor : tile.getEmptyNeighbors()) {
+                    if (!visited.contains(neighbor)) {
+                        visited.add(neighbor);
+                        fringes.get(k).add(neighbor);
+                    }
+                }
+            }
+        }
+
+        return visited;
+    }
+
+    public Offset toOffset() {
+        if (grid.OFFSET_TYPE == 'R') {
+            return hex.toRoffset(grid.OFFSET);
+        }
+        else {
+            return hex.toQoffset(grid.OFFSET);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Tile{" +
+                "grid=" + grid +
+                ", hex=" + hex +
+                ", minion=" + minion +
+                '}';
     }
 }
