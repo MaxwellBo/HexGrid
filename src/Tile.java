@@ -104,13 +104,12 @@ class Tile {
         return Optional.of(path);
     }
 
-    public Offset toRoffset(int offset) {
-        return hex.toRoffset(offset);
+    public Offset toOffset() {
+        if (grid.OFFSET_TYPE == 'R') {
+            return hex.toRoffset(grid.OFFSET);
+        }
+        else {
+            return hex.toQoffset(grid.OFFSET);
+        }
     }
-
-    public Offset toQoffset(int offset) {
-        return hex.toQoffset(offset);
-    }
-
-
 }

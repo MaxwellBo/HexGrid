@@ -48,7 +48,7 @@ class DisplayPanel extends JPanel {
                         break;
                     case MouseEvent.BUTTON2:
                     case MouseEvent.BUTTON3:
-                        Offset foundOffset = found.toRoffset(Offset.EVEN);
+                        Offset foundOffset = found.toOffset();
                         System.out.println(Integer.toString(foundOffset.row)
                             + " "
                             + Integer.toString(foundOffset.col));
@@ -72,7 +72,7 @@ class DisplayPanel extends JPanel {
             }
 
             g.setColor(Color.BLACK);
-            Offset offset = tile.toRoffset(Offset.EVEN);
+            Offset offset = tile.toOffset();
             g.drawString(Integer.toString(offset.row)
                     + " "
                     + Integer.toString(offset.col), x, y);
