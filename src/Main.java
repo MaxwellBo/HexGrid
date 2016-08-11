@@ -48,11 +48,15 @@ class DisplayPanel extends JPanel {
                         break;
                     case MouseEvent.BUTTON2:
                     case MouseEvent.BUTTON3:
+                        // Used for debug
                         Offset foundOffset = found.toOffset();
                         System.out.println(Integer.toString(foundOffset.row)
                             + " "
                             + Integer.toString(foundOffset.col));
+
                         System.out.println(found.getMinion().isPresent());
+
+                        System.out.println(found.reachableTiles(1).toString());
                 }
             }
         });

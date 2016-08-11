@@ -104,6 +104,32 @@ class Tile {
         return Optional.of(path);
     }
 
+    public Set<Tile> reachableTiles(int steps) {
+        Set<Tile> visited = new HashSet<>();
+        visited.add(this);
+
+        ArrayList<ArrayList<Tile>> fringes = new ArrayList<>();
+        ArrayList<Tile> start = new ArrayList<>();
+        start.add(this);
+        fringes.add(start);
+
+        for (int k = 1; k <= steps; k++) {
+            ArrayList<Tile> collector = new ArrayList<>();
+            fringes.add(collector);
+
+            for (Tile tile : fringes.get(k - 1)) {
+                for (Tile neighbor : tile.getEmptyNeighbors()) {
+                    if (!visited.contains(neighbor)) {
+                        visited.add(neighbor);
+                        fringes.get(k).add(neighbor);
+                    }
+                }
+            }
+        }
+
+        return visited;
+    }
+
     public Offset toOffset() {
         if (grid.OFFSET_TYPE == 'R') {
             return hex.toRoffset(grid.OFFSET);
@@ -111,5 +137,14 @@ class Tile {
         else {
             return hex.toQoffset(grid.OFFSET);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Tile{" +
+                "grid=" + grid +
+                ", hex=" + hex +
+                ", minion=" + minion +
+                '}';
     }
 }
