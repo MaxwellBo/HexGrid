@@ -1,12 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.Container;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class Main extends JPanel {
 
@@ -23,7 +21,7 @@ class DisplayFrame extends JFrame {
     public DisplayFrame() {
         setTitle("Hex Grid");
         setBounds(50, 50, 700, 700);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container c = getContentPane();
         c.add(panel);
     }
@@ -50,7 +48,7 @@ class DisplayPanel extends JPanel {
                         break;
                     case MouseEvent.BUTTON2:
                     case MouseEvent.BUTTON3:
-                        Offset foundOffset = found.hex.toRoffset(Offset.EVEN);
+                        Offset foundOffset = found.toRoffset(Offset.EVEN);
                         System.out.println(Integer.toString(foundOffset.row)
                             + " "
                             + Integer.toString(foundOffset.col));
@@ -74,7 +72,7 @@ class DisplayPanel extends JPanel {
             }
 
             g.setColor(Color.BLACK);
-            Offset offset = tile.hex.toRoffset(Offset.EVEN);
+            Offset offset = tile.toRoffset(Offset.EVEN);
             g.drawString(Integer.toString(offset.row)
                     + " "
                     + Integer.toString(offset.col), x, y);
@@ -93,9 +91,9 @@ class DisplayPanel extends JPanel {
                     .toArray();
 
         int[] ys = path
-                .stream()
-                .mapToInt(x -> (int)(x.getCoords().getY()))
-                .toArray();
+                    .stream()
+                    .mapToInt(x -> (int)(x.getCoords().getY()))
+                    .toArray();
         g.drawPolyline(xs, ys, path.size());
 
     }

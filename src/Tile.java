@@ -9,8 +9,8 @@ import java.util.*;
 
 class Tile {
 
-    final HexGrid grid;
-    final Hex hex;
+    private final HexGrid grid;
+    private final Hex hex;
     private Minion minion;
 
     Tile(HexGrid grid, Hex hex) {
@@ -19,7 +19,7 @@ class Tile {
         this.minion = null;
     }
 
-    public Optional<Tile> neighbor(int direction) {
+    public Optional<Tile> getNeighbor(int direction) {
         return Optional.ofNullable(grid.getMap().get(this.hex.neighbor(direction)));
     }
 
@@ -53,14 +53,14 @@ class Tile {
         minion = x;
     }
 
-    private ArrayList<Tile> emptyNeighbors() {
+    private ArrayList<Tile> getEmptyNeighbors() {
         ArrayList<Tile> collector = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            Optional<Tile> n = neighbor(i);
+            Optional<Tile> n = getNeighbor(i);
 
             // Only yield empty tiles
             if (n.isPresent() && !n.get().getMinion().isPresent())
-                collector.add(neighbor(i).get());
+                collector.add(getNeighbor(i).get());
             }
         return collector;
     }
@@ -76,7 +76,7 @@ class Tile {
         while (!frontier.isEmpty()) {
             Tile current = frontier.removeFirst();
 
-            for (Tile next : current.emptyNeighbors()) {
+            for (Tile next : current.getEmptyNeighbors()) {
                 if (!cameFrom.containsKey(next)) {
                     frontier.add(next);
                     cameFrom.put(next, current);
@@ -103,4 +103,14 @@ class Tile {
         Collections.reverse(path);
         return Optional.of(path);
     }
+
+    public Offset toRoffset(int offset) {
+        return hex.toRoffset(offset);
+    }
+
+    public Offset toQoffset(int offset) {
+        return hex.toQoffset(offset);
+    }
+
+
 }
